@@ -5,7 +5,7 @@
     "Eduardo D. Sada"
   ],
   "description": "jQuery sexy tooltips",
-  "main": "src/sexy-tooltips.js",
+  "main": "js/sexy-tooltips.js",
   "keywords": [
     "jquery",
     "sexy",
