@@ -6,6 +6,9 @@
   ],
   "description": "jQuery sexy tooltips",
   "main": "js/sexy-tooltips.js",
+  "ignore": [
+    "bower.json"
+  ],
   "keywords": [
     "jquery",
     "sexy",
