@@ -90,25 +90,27 @@ jQuery.bind = function(object, method){
       this.skeleton.middle.html(content);
       
       if (this.options.hook) {
-        this.trigger.bind('mousemove', $.bind(this, this.hook));
+        this.trigger.on('mousemove.tooltip', $.bind(this, this.hook));
       }
 
       if (this.options.click) {
-        this.trigger.bind('click', $.bind(this, this.show));
+        this.trigger.on('click.tooltip', $.bind(this, this.show));
       }
 
       if (this.options.mouse && !this.options.click) {
-        this.trigger.bind('mouseenter', $.bind(this, this.show));
+        this.trigger.on('mouseenter.tooltip', $.bind(this, this.show));
         if (!this.options.sticky) {
-          this.trigger.bind('mouseleave', $.bind(this, this.hide));
+          this.trigger.on('mouseleave.tooltip', $.bind(this, this.hide));
         }
       }
 
       if (this.options.sticky) {
-        this.skeleton.close.bind('mouseenter', $.bind(this, this.hide));
+        this.skeleton.close.on('mouseenter.tooltip', $.bind(this, this.hide));
       }
 
-      $(window).bind('resize', $.bind(this, function() {
+      this.uniqId = Math.floor(Math.random() * 100000);
+
+      $(window).on('resize.tooltip' + this.uniqId, $.bind(this, function() {
         this.tooltip.css({
           display   : 'none',
           opacity   : 0,
@@ -119,6 +121,21 @@ jQuery.bind = function(object, method){
       }));
 
       return this;
+    },
+
+    destroy: function () {
+      this.trigger.off('mousemove.tooltip');
+      this.trigger.off('click.tooltip');
+      this.trigger.off('mouseenter.tooltip');
+      this.trigger.off('mouseleave.tooltip');
+      
+      if (this.options.sticky) {
+        this.skeleton.close.off('mouseenter.tooltip');
+      }
+      
+      $(window).off('resize.tooltip' + this.uniqId);
+      
+      this.tooltip.remove();
     },
     
     create: function() {
