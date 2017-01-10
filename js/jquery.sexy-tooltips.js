@@ -235,7 +235,7 @@ jQuery.bind = function(object, method){
           complete: $.bind(this, function() {
             this.tooltip.css({ opacity: '' }); // bug de jQuery, en IE deja vivo el opacity aunque sea = 1
                                                // En mootools obvio no pasa esto.
-            this.fireevents(1)
+            this.fireevents(1);
           })
         }));
 
@@ -290,7 +290,7 @@ jQuery.bind = function(object, method){
           y: event.pageY || event.clientY + window.document.scrollTop
         };
 
-        var trg = $.extend({}, trg, {
+        trg = $.extend({}, trg, {
             'top'   : page.y,
             'left'  : page.x,
             'width' : 0
@@ -340,11 +340,11 @@ jQuery.bind = function(object, method){
     
     arrow: function(direction) {
       if (direction == "bottom") {
-        if (!this.skeleton.bottom.children(this.skeleton.arrow).length > 0) {
+        if (this.skeleton.bottom.children(this.skeleton.arrow).length === 0) {
           this.skeleton.bottom.append(this.skeleton.arrow);
         }
       } else if (direction == "top") {
-        if (!this.skeleton.top.children(this.skeleton.arrow).length > 0) {
+        if (this.skeleton.top.children(this.skeleton.arrow).length === 0) {
           this.skeleton.top.append(this.skeleton.arrow);
         }
       } else if (direction == "left") {
